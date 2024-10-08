@@ -49,6 +49,12 @@ class SpatialGrid {
 	}
 
 
+	isCovered(obj1, obj2) {
+		const bounds1 = obj1.getBounds();
+		const bounds2 = obj2.getBounds();
+		return bounds1.minX >= bounds2.minX && bounds1.minY >= bounds2.minY &&
+			bounds1.maxX <= bounds2.maxX && bounds1.maxY <= bounds2.maxY;
+	}
 }
 
 module.exports = SpatialGrid;
