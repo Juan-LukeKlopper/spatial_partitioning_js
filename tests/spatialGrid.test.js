@@ -23,6 +23,16 @@ test('Retrieve objects within a rectangular area', () => {
 	expect(result).not.toContain(obj2);
 });
 
+test('Object is completely covered by another object', () => {
+	const obj1 = new GameObject(5, 5, 2, 2);
+	const obj2 = new GameObject(4, 4, 5, 5);
+	const grid = new SpatialGrid();
 
+	// Insert objects to check coverage
+	grid.insert(obj1);
+	grid.insert(obj2);
+
+	expect(grid.isCovered(obj1, obj2)).toBe(true);
+});
 
 
