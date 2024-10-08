@@ -1,5 +1,8 @@
 class GameObject {
 	constructor(x, y, width = 1, height = 1) {
+		if (width <= 0 || height <= 0) {
+			throw new Error('Width and height must be positive values.');
+		}
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -17,4 +20,3 @@ class GameObject {
 }
 
 module.exports = GameObject;
-
