@@ -6,6 +6,13 @@ class SpatialGrid {
 		this.cellSize = cellSize;
 		this.grid = {};
 	}
+
+	_getCellCoords(x, y) {
+		return {
+			cellX: Math.floor(x / this.cellSize),
+			cellY: Math.floor(y / this.cellSize)
+		};
+	}
 }
 
 module.exports = SpatialGrid;
