@@ -55,6 +55,33 @@ class SpatialGrid {
 		return bounds1.minX >= bounds2.minX && bounds1.minY >= bounds2.minY &&
 			bounds1.maxX <= bounds2.maxX && bounds1.maxY <= bounds2.maxY;
 	}
+
+	// New method: Check if an object is completely covered by any other object
+	isCoveredByAny(targetObj) {
+		const { minX, minY, maxX, maxY } = targetObj.getBounds();
+		const checkedObjects = new Set();
+
+		// Iterate over the grid cells the target object occupies
+		for (let x = Math.floor(minX / this.cellSize); x <= Math.floor(maxX / this.cellSize); x++) {
+			for (let y = Math.floor(minY / this.cellSize); y <= Math.floor(maxY / this.cellSize); y++) {
+				const key = `${x},${y}`;
+
+				// Check each object in the same cell
+				if (this.grid[key]) {
+					for (const obj of this.grid[key]) {
+						// Avoid checking the target object against itself and avoid duplicate checks
+						if (obj !== targetObj && !checkedObjects.has(obj)) {
+							if (this.isCovered(targetObj, obj)) {
+								return true;
+							}
+							checkedObjects.add(obj);
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
 }
 
 module.exports = SpatialGrid;
