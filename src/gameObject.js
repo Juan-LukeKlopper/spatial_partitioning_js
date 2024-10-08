@@ -5,6 +5,15 @@ class GameObject {
 		this.width = width;
 		this.height = height;
 	}
+
+	getBounds() {
+		return {
+			minX: this.x,
+			minY: this.y,
+			maxX: this.x + this.width,
+			maxY: this.y + this.height
+		};
+	}
 }
 
 module.exports = GameObject;
